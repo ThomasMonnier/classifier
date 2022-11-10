@@ -6,13 +6,13 @@ def ocr_tesseract(path):
 
 
 def convert_pdf(file):
-    if file.name.endswith('.pdf'):
+    if file.endswith('.pdf'):
         pages = convert_from_path(file, 500)
-        pages[0].save("{}.png".format(file.name.split('.')[0]), 'PNG')
-        return "{}.png".format(file.name.split('.')[0])
+        pages[0].save("{}.png".format(file.split('.')[0]), 'PNG')
+        return "{}.png".format(file.split('.')[0])
     
-    elif file.name.endswith(".png"):
-        return file.name
+    elif file.endswith(".png"):
+        return file
     
     else:
         st.error('The file is not in PNG nor PDF format.')
