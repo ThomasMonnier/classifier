@@ -8,7 +8,7 @@ def classifier_country(file):
     _, lng_api, _ = st.columns(3)
 
     with lng_api:
-        lng_api_button = st.button('Get the language of file')
+        lng_api_button = st.button('Get the language of file', key="clf_1")
 
     if lng_api_button:
         img_path = convert_pdf(file)
