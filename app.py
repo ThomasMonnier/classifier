@@ -2,15 +2,13 @@ import streamlit as st
 import shutil
 
 from src.utils import ocr_tesseract, convert_pdf
+from src.clf_country import detect_lang_from_str
 
 
 def classifier_country(file):
-    st.info(file)
     img_path = convert_pdf(file)
-    st.info(img_path)
     ocr_str = ocr_tesseract(img_path)
-    st.info(ocr_str)
-    all_lng, lng = classifier_country(ocr_str)
+    all_lng, lng = detect_lang_from_str(ocr_str)
     if lng is None:
         st.error('Impossible to detect the language of the document, check {}'.format(all_lng))
     else:
