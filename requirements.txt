@@ -1,0 +1,4 @@
+streamlit
+pytesseract
+langdetect
+pdf2image
