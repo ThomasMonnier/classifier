@@ -17,12 +17,11 @@ def detect_lang_from_str(ocr_str):
         except:
             pass
     
-    yield lang
     lng = max(lang, key=lang.get)
     lang_others = lang.copy()
     del lang_others[lng]
     lng_val = lang[lng]
     if lng_val > 2 * lang[max(lang_others, key=lang_others.get)]:
-        return lng
+        return lang, lng
     else:
-        return None
+        return lang, None
