@@ -5,6 +5,7 @@ from src.utils import ocr_tesseract, convert_pdf
 
 
 def classifier_country(file):
+    st.info(file)
     img_path = convert_pdf(file)
     ocr_str = ocr_tesseract(img_path)
     all_lng, lng = classifier_country(ocr_str)
