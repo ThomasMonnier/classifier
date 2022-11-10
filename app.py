@@ -1,4 +1,5 @@
 import streamlit as st
+import shutil
 
 from src.utils import ocr_tesseract, convert_pdf
 
@@ -41,4 +42,6 @@ if __name__=="__main__":
     )
 
     if uploaded_file:
+        with open(uploaded_file.name, "wb") as buffer:
+            shutil.copyfileobj(uploaded_file, buffer)
         classifier_country(uploaded_file)
