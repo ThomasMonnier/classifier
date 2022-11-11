@@ -35,7 +35,7 @@ def classifier_country(file):
 def classifier_supplier(model_path, img_path):
     model = load_model(model_path)
     img_final = prepare_img(img_path)
-    pred = model.predict(img_final)
+    pred = model.predict([img_final])
     return pred
 
 
