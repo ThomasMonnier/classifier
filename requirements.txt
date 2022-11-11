@@ -2,3 +2,6 @@ streamlit
 pytesseract
 langdetect
 pdf2image
+opencv-python-headless
+black
+isort

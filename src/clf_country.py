@@ -2,9 +2,9 @@ from . import detect
 
 
 def detect_lang_from_str(ocr_str):
-    lines = list(set(ocr_str.split('\n')))
-    lines.remove('')
-    lines.remove(' ')
+    lines = list(set(ocr_str.split("\n")))
+    lines.remove("")
+    lines.remove(" ")
 
     lang = {}
     for line in lines:
@@ -16,7 +16,7 @@ def detect_lang_from_str(ocr_str):
                 lang[lang_detected] += 1
         except:
             pass
-    
+
     lng = max(lang, key=lang.get)
     lang_others = lang.copy()
     del lang_others[lng]

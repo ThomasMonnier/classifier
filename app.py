@@ -1,8 +1,19 @@
-import streamlit as st
 import shutil
 
-from src.utils import ocr_tesseract, convert_pdf
+import streamlit as st
+
 from src.clf_country import detect_lang_from_str
+from src.clf_supplier import load_model, prepare_img
+from src.utils import convert_pdf, ocr_tesseract
+
+dict_labels = {
+    0: "endesa",
+    1: "energia_xxi",
+    2: "fenie",
+    3: "holaluz",
+    4: "iberdrola",
+    5: "naturgy",
+}
 
 
 def classifier_country(file):
@@ -10,23 +21,32 @@ def classifier_country(file):
     ocr_str = ocr_tesseract(img_path)
     all_lng, lng = detect_lang_from_str(ocr_str)
     if lng is None:
-        st.error('Impossible to detect the language of the document, check {}'.format(all_lng))
+        st.error(
+            "Impossible to detect the language of the document, check {}".format(
+                all_lng
+            )
+        )
+        return None, img_path
     else:
-        st.info('Country: {}'.format(lng))
+        st.info("Country: {}".format(lng))
+        return lng, img_path
 
 
-def classifier_supplier():
-    pass
+def classifier_supplier(model_path, img_path):
+    model = load_model(model_path)
+    img_final = prepare_img(img_path)
+    pred = model.predict(img_final)
+    return pred
 
 
 def classifier_type():
     pass
 
 
-if __name__=="__main__":
+if __name__ == "__main__":
     st.markdown(
-    "<h1 style='text-align: center; color: green;'>Classifier API</h1>",
-    unsafe_allow_html=True,
+        "<h1 style='text-align: center; color: green;'>Classifier API</h1>",
+        unsafe_allow_html=True,
     )
     st.write(
         "With this API, you can import an invoice (PDF or PNG) which will be first classified by its country, then by its supplier, and then by its energy type."
@@ -39,11 +59,19 @@ if __name__=="__main__":
     if uploaded_file:
         with open(uploaded_file.name, "wb") as buffer:
             shutil.copyfileobj(uploaded_file, buffer)
-        
 
         _, lng_api, _ = st.columns(3)
         with lng_api:
-            lng_api_button = st.button('Get the language of file', key="clf_1")
-        
+            lng_api_button = st.button("Get the language of file", key="clf_1")
+
         if lng_api_button:
-            classifier_country(uploaded_file.name)
+            lng, img_path = classifier_country(uploaded_file.name)
+            st.image(img_path)
+            if lng == "es":
+                _, supp_api, _ = st.columns(3)
+                with supp_api:
+                    supp_api_button = st.button("Get the supplier", key="clf_2")
+                if supp_api_button:
+                    model_path = "models/spain_supplier_model.pkl"
+                    pred = classifier_supplier(model_path, img_path)
+                    st.info(dict_labels[pred])
