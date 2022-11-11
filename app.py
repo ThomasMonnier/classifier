@@ -80,4 +80,4 @@ if __name__ == "__main__":
             if supp_api_button:
                 model_path = "models/spain_supplier_model.pkl"
                 pred = classifier_supplier(model_path, st.session_state['img_path'])
-                st.info(dict_labels[pred[0]])
+                st.info("Supplier is {}".format(dict_labels[pred[0]]))
