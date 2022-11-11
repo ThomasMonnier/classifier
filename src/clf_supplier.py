@@ -4,8 +4,8 @@ from . import cv2, np, pickle
 def prepare_img(img_path, width=512, height=512):
     img = cv2.imread(img_path)
     resized_img = cv2.resize(img, (width, height))
-    nsamples, nx, ny, nz = np.array(resized_img).shape
-    img_final = np.array(resized_img).reshape((nsamples, nx * ny * nz))
+    nx, ny, nz = np.array(resized_img).shape
+    img_final = np.array(resized_img).reshape((nx * ny * nz))
     return img_final
 
 
