@@ -5,3 +5,6 @@ pdf2image
 opencv-python-headless
 black
 isort
+scikit-learn
+scipy
+matplotlib

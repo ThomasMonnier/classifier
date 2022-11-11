@@ -75,7 +75,6 @@ if __name__ == "__main__":
         
         if st.session_state['lng'] == "es":
             _, supp_api, _ = st.columns(3)
-            st.image(st.session_state['img_path'])
             with supp_api:
                 supp_api_button = st.button("Get the supplier", key="clf_2")
             if supp_api_button:
