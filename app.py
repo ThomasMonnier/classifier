@@ -59,19 +59,26 @@ if __name__ == "__main__":
     if uploaded_file:
         with open(uploaded_file.name, "wb") as buffer:
             shutil.copyfileobj(uploaded_file, buffer)
+        
+        if 'lng' not in st.session_state:
+            st.session_state['lng'] = None
+        if 'img_path' not in st.session_state:
+            st.session_state['img_path'] = None
 
         _, lng_api, _ = st.columns(3)
         with lng_api:
             lng_api_button = st.button("Get the language of file", key="clf_1")
 
         if lng_api_button:
-            lng, img_path = classifier_country(uploaded_file.name)
-            st.image(img_path)
-            if lng == "es":
-                _, supp_api, _ = st.columns(3)
-                with supp_api:
-                    supp_api_button = st.button("Get the supplier", key="clf_2")
-                if supp_api_button:
-                    model_path = "models/spain_supplier_model.pkl"
-                    pred = classifier_supplier(model_path, img_path)
-                    st.info(dict_labels[pred])
+            st.session_state['lng'], st.session_state['img_path'] = classifier_country(uploaded_file.name)
+            st.image(st.session_state['img_path'])
+        
+        if st.session_state['lng'] == "es":
+            _, supp_api, _ = st.columns(3)
+            st.image(st.session_state['img_path'])
+            with supp_api:
+                supp_api_button = st.button("Get the supplier", key="clf_2")
+            if supp_api_button:
+                model_path = "models/spain_supplier_model.pkl"
+                pred = classifier_supplier(model_path, st.session_state['img_path'])
+                st.info(dict_labels[pred])
