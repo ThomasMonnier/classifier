@@ -24,8 +24,6 @@ def classifier_country(file):
     img_path = convert_pdf(file)
     ocr_str = ocr_tesseract(img_path)
     lng, prob = detect_lang_from_str(ocr_str)
-    st.info('Probability info: {}%'.format(round(prob * 100, 2)))
-    st.success("Country: {}".format(dict_countries.get(lng)))
     return lng, img_path, prob
 
 
@@ -71,7 +69,7 @@ if __name__ == "__main__":
                     shutil.copyfileobj(uploaded_file, buffer)
 
                 lng, img_path, prob = classifier_country(uploaded_file.name)
-                st.session_state.df.loc[st.session_state.df['File'] == uploaded_file.name, 'Language'] = lng
+                st.session_state.df.loc[st.session_state.df['File'] == uploaded_file.name, 'Language'] = dict_countries.get(lng)
                 st.session_state.df.loc[st.session_state.df['File'] == uploaded_file.name, 'Language Probability'] = round(prob, 2)
                 
                 if lng == "es":
