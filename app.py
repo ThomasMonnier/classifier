@@ -69,30 +69,14 @@ if __name__ == "__main__":
 
                 with open(uploaded_file.name, "wb") as buffer:
                     shutil.copyfileobj(uploaded_file, buffer)
-                
-                # if 'lng' not in st.session_state:
-                #     st.session_state['lng'] = None
-                # if 'img_path' not in st.session_state:
-                #     st.session_state['img_path'] = None
-
-                # _, lng_api, _ = st.columns(3)
-                # with lng_api:
-                #     lng_api_button = st.button("Get the language of file", key="clf_1")
-
-                # if lng_api_button:
 
                 lng, img_path, prob = classifier_country(uploaded_file.name)
                 st.session_state.df.loc[st.session_state.df['File'] == uploaded_file.name, 'Language'] = lng
-                st.session_state.df.loc[st.session_state.df['File'] == uploaded_file.name, 'Language Probability'] = prob
+                st.session_state.df.loc[st.session_state.df['File'] == uploaded_file.name, 'Language Probability'] = round(prob, 2)
                 
                 if lng == "es":
-                    # _, supp_api, _ = st.columns(3)
-                    # with supp_api:
-                    #     supp_api_button = st.button("Get the supplier", key="clf_2")
-                    # if supp_api_button:
-
                     model_path = "models/spain_supplier_model.pkl"
                     pred = classifier_supplier(model_path, img_path)
-                    st.session_state.df.loc[st.session_state.df['File'] == uploaded_file.name, 'Supplier (ML)'] = pred
+                    st.session_state.df.loc[st.session_state.df['File'] == uploaded_file.name, 'Supplier (ML)'] = dict_labels.get(pred)
 
             st.dataframe(st.session_state.df)
