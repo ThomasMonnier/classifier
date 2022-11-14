@@ -77,6 +77,6 @@ if __name__ == "__main__":
                 if lng == "es":
                     model_path = "models/spain_supplier_model.pkl"
                     pred = classifier_supplier(model_path, img_path)
-                    st.session_state.df.loc[st.session_state.df['File'] == uploaded_file.name, 'Supplier (ML)'] = dict_labels.get(pred)
+                    st.session_state.df.loc[st.session_state.df['File'] == uploaded_file.name, 'Supplier (ML)'] = dict_labels.get(pred[0])
 
             st.dataframe(st.session_state.df)
