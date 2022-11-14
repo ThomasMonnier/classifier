@@ -61,6 +61,7 @@ if __name__ == "__main__":
     with placeholder.container():
 
         if uploaded_files:
+            progress_bar = st.progress(0)
 
             for i, uploaded_file in enumerate(uploaded_files):
                 st.session_state.df.loc[i] = [uploaded_file.name, None, None, None, None, None]
@@ -77,4 +78,5 @@ if __name__ == "__main__":
                     pred = classifier_supplier(model_path, img_path)
                     st.session_state.df.loc[st.session_state.df['File'] == uploaded_file.name, 'Supplier (ML)'] = dict_labels.get(pred[0])
 
-            st.dataframe(st.session_state.df)
+                st.dataframe(st.session_state.df)
+                progress_bar.progress(int(100 * (i + 1) / len(uploaded_files)))
