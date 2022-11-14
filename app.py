@@ -62,7 +62,7 @@ if __name__ == "__main__":
         dataframe = st.dataframe(st.session_state.df)
 
         for i, uploaded_file in enumerate(uploaded_files):
-            if uploaded_file.name not in st.session_state.df["File"]:
+            if uploaded_file.name not in list(st.session_state.df["File"]):
                 st.session_state.df.loc[i] = [uploaded_file.name, None, None, None, None, None]
 
                 with open(uploaded_file.name, "wb") as buffer:
