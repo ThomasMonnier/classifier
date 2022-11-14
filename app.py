@@ -8,12 +8,12 @@ from src.clf_supplier import load_model, prepare_img
 from src.utils import convert_pdf, ocr_tesseract
 
 dict_labels = {
-    0: "endesa",
-    1: "energia_xxi",
-    2: "fenie",
-    3: "holaluz",
-    4: "iberdrola",
-    5: "naturgy",
+    0: "Endesa",
+    1: "Energia xxi",
+    2: "Fenie",
+    3: "Holaluz",
+    4: "Iberdrola",
+    5: "Naturgy",
 }
 
 df_countries = pd.read_csv('languages.csv', header=None, names=['abreviation', 'country'])
@@ -70,7 +70,7 @@ if __name__ == "__main__":
 
                 lng, img_path, prob = classifier_country(uploaded_file.name)
                 st.session_state.df.loc[st.session_state.df['File'] == uploaded_file.name, 'Language'] = dict_countries.get(lng)
-                st.session_state.df.loc[st.session_state.df['File'] == uploaded_file.name, 'Language Probability'] = round(prob, 2)
+                st.session_state.df.loc[st.session_state.df['File'] == uploaded_file.name, 'Language Probability'] = round(100 * prob, 2)
                 
                 if lng == "es":
                     model_path = "models/spain_supplier_model.pkl"
