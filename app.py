@@ -58,10 +58,10 @@ if __name__ == "__main__":
 
     placeholder = st.empty()
 
-    with placeholder.container():
+    if uploaded_files:
+        progress_bar = st.progress(0)
 
-        if uploaded_files:
-            progress_bar = st.progress(0)
+        with placeholder.container():
 
             for i, uploaded_file in enumerate(uploaded_files):
                 st.session_state.df.loc[i] = [uploaded_file.name, None, None, None, None, None]
@@ -71,7 +71,7 @@ if __name__ == "__main__":
 
                 lng, img_path, prob = classifier_country(uploaded_file.name)
                 st.session_state.df.loc[st.session_state.df['File'] == uploaded_file.name, 'Language'] = dict_countries.get(lng)
-                st.session_state.df.loc[st.session_state.df['File'] == uploaded_file.name, 'Language Probability'] = round(100 * prob, 2)
+                st.session_state.df.loc[st.session_state.df['File'] == uploaded_file.name, 'Language Probability'] = int(100 * prob)
                 
                 if lng == "es" or lng == "ca":
                     model_path = "models/spain_supplier_model.pkl"
