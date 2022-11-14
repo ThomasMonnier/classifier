@@ -72,7 +72,7 @@ if __name__ == "__main__":
                 st.session_state.df.loc[st.session_state.df['File'] == uploaded_file.name, 'Language'] = dict_countries.get(lng)
                 st.session_state.df.loc[st.session_state.df['File'] == uploaded_file.name, 'Language Probability'] = round(100 * prob, 2)
                 
-                if lng == "es":
+                if lng == "es" or lng == "ca":
                     model_path = "models/spain_supplier_model.pkl"
                     pred = classifier_supplier(model_path, img_path)
                     st.session_state.df.loc[st.session_state.df['File'] == uploaded_file.name, 'Supplier (ML)'] = dict_labels.get(pred[0])
