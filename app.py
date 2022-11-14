@@ -16,7 +16,8 @@ dict_labels = {
     5: "naturgy",
 }
 
-dict_countries = merge_dicts(pd.read_csv('languages.csv').to_dict(orient='records'))
+df = pd.read_csv('languages.csv', header=None, columns=['abreviation', 'country'])
+dict_countries = dict(zip(df.abreviation, df.country))
 
 
 def classifier_country(file):
