@@ -63,7 +63,6 @@ if __name__ == "__main__":
     with placeholder.container():
 
         if uploaded_files:
-            st.dataframe(st.session_state.df)
 
             for i, uploaded_file in enumerate(uploaded_files):
                 st.session_state.df.loc[i] = [uploaded_file.name, None, None, None, None, None]
@@ -95,3 +94,5 @@ if __name__ == "__main__":
                     model_path = "models/spain_supplier_model.pkl"
                     pred = classifier_supplier(model_path, img_path)
                     st.session_state.df.loc[st.session_state.df['File'] == uploaded_file.name, 'Supplier (ML)'] = pred
+
+            st.dataframe(st.session_state.df)
