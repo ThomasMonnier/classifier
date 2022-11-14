@@ -24,5 +24,5 @@ def detect_lang_from_str(ocr_str):
     if lng_val > 2 * lang[max(lang_others, key=lang_others.get)]:
         prob = 1.0
     else:
-        prob = 1 - ((2 * lang[max(lang_others, key=lang_others.get)] - lng_val) / lng_val)
+        prob = 1 - 0.8 * ((2 * lang[max(lang_others, key=lang_others.get)] - lng_val) / lng_val)
     return lng, prob
