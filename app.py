@@ -71,11 +71,12 @@ if __name__ == "__main__":
                 lng, img_path, prob = classifier_country(uploaded_file.name)
                 st.session_state.df.loc[st.session_state.df['File'] == uploaded_file.name, 'Language'] = dict_countries.get(lng)
                 st.session_state.df.loc[st.session_state.df['File'] == uploaded_file.name, 'Language Probability'] = int(100 * prob)
+                dataframe.dataframe(st.session_state.df)
                 
                 if lng == "es" or lng == "ca":
                     model_path = "models/spain_supplier_model.pkl"
                     pred = classifier_supplier(model_path, img_path)
                     st.session_state.df.loc[st.session_state.df['File'] == uploaded_file.name, 'Supplier (ML)'] = dict_labels.get(pred[0])
-
-                dataframe.dataframe(st.session_state.df)
+                    dataframe.dataframe(st.session_state.df)
+                    
             progress_bar.progress(int(100 * (i + 1) / len(uploaded_files)))
