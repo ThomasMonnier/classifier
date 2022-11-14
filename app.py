@@ -52,13 +52,13 @@ if __name__ == "__main__":
     if 'df' not in st.session_state:
         st.session_state.df = pd.DataFrame(columns=["File", "Language", "Language Probability", "Supplier (ML)", "Supplier (Mindee)", "Supplier (Stats)"])
 
-    placeholder = st.empty()
-
     uploaded_files = st.file_uploader(
         "Choose a file (PDF / PNG)",
         type=['png', 'jpg', 'pdf'],
         accept_multiple_files=True
     )
+
+    placeholder = st.empty()
 
     with placeholder.container():
 
