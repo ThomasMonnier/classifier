@@ -5,7 +5,7 @@ import streamlit as st
 
 from src.clf_country import detect_lang_from_str
 from src.clf_supplier import load_model, prepare_img
-from src.utils import convert_pdf, ocr_tesseract, merge_dicts
+from src.utils import convert_pdf, ocr_tesseract
 
 dict_labels = {
     0: "endesa",
@@ -24,9 +24,6 @@ def classifier_country(file):
     img_path = convert_pdf(file)
     ocr_str = ocr_tesseract(img_path)
     lng, prob = detect_lang_from_str(ocr_str)
-    st.info(lng)
-    st.info(dict_countries)
-    st.info(dict_countries.get(lng))
     st.info('Probability info: {}%'.format(round(prob * 100, 2)))
     st.success("Country: {}".format(dict_countries.get(lng)))
     return lng, img_path
