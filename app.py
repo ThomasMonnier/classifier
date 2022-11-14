@@ -5,7 +5,7 @@ import streamlit as st
 
 from src.clf_country import detect_lang_from_str
 from src.clf_supplier import load_model, prepare_img
-from src.utils import convert_pdf, ocr_tesseract
+from src.utils import convert_pdf, ocr_tesseract, merge_dicts
 
 dict_labels = {
     0: "endesa",
@@ -16,7 +16,7 @@ dict_labels = {
     5: "naturgy",
 }
 
-dict_countries = pd.read_csv('languages.csv').to_dict(orient='records')
+dict_countries = merge_dicts(pd.read_csv('languages.csv').to_dict(orient='records'))
 
 
 def classifier_country(file):

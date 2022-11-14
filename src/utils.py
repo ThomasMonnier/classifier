@@ -16,3 +16,14 @@ def convert_pdf(file):
 
     else:
         st.error("The file is not in PNG nor PDF format.")
+
+
+def merge_dicts(l):
+    """
+    Given any number of dictionaries, shallow copy and merge into a new dict,
+    precedence goes to key-value pairs in latter dictionaries.
+    """
+    di = {}
+    for dictionary in l:
+        di.update(dictionary)
+    return di
