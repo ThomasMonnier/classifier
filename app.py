@@ -16,7 +16,7 @@ dict_labels = {
     5: "naturgy",
 }
 
-df = pd.read_csv('languages.csv', header=None, columns=['abreviation', 'country'])
+df = pd.read_csv('languages.csv', header=None, names=['abreviation', 'country'])
 dict_countries = dict(zip(df.abreviation, df.country))
 
 
