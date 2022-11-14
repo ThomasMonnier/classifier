@@ -56,27 +56,25 @@ if __name__ == "__main__":
         accept_multiple_files=True
     )
 
-    placeholder = st.empty()
-
     if uploaded_files:
         progress_bar = st.progress(0)
 
-        with placeholder.container():
+        dataframe = st.dataframe(st.session_state.df)
 
-            for i, uploaded_file in enumerate(uploaded_files):
-                st.session_state.df.loc[i] = [uploaded_file.name, None, None, None, None, None]
+        for i, uploaded_file in enumerate(uploaded_files):
+            st.session_state.df.loc[i] = [uploaded_file.name, None, None, None, None, None]
 
-                with open(uploaded_file.name, "wb") as buffer:
-                    shutil.copyfileobj(uploaded_file, buffer)
+            with open(uploaded_file.name, "wb") as buffer:
+                shutil.copyfileobj(uploaded_file, buffer)
 
-                lng, img_path, prob = classifier_country(uploaded_file.name)
-                st.session_state.df.loc[st.session_state.df['File'] == uploaded_file.name, 'Language'] = dict_countries.get(lng)
-                st.session_state.df.loc[st.session_state.df['File'] == uploaded_file.name, 'Language Probability'] = int(100 * prob)
-                
-                if lng == "es" or lng == "ca":
-                    model_path = "models/spain_supplier_model.pkl"
-                    pred = classifier_supplier(model_path, img_path)
-                    st.session_state.df.loc[st.session_state.df['File'] == uploaded_file.name, 'Supplier (ML)'] = dict_labels.get(pred[0])
+            lng, img_path, prob = classifier_country(uploaded_file.name)
+            st.session_state.df.loc[st.session_state.df['File'] == uploaded_file.name, 'Language'] = dict_countries.get(lng)
+            st.session_state.df.loc[st.session_state.df['File'] == uploaded_file.name, 'Language Probability'] = int(100 * prob)
+            
+            if lng == "es" or lng == "ca":
+                model_path = "models/spain_supplier_model.pkl"
+                pred = classifier_supplier(model_path, img_path)
+                st.session_state.df.loc[st.session_state.df['File'] == uploaded_file.name, 'Supplier (ML)'] = dict_labels.get(pred[0])
 
-                st.dataframe(st.session_state.df)
-                progress_bar.progress(int(100 * (i + 1) / len(uploaded_files)))
+            dataframe.dataframe(st.session_state.df)
+            progress_bar.progress(int(100 * (i + 1) / len(uploaded_files)))
