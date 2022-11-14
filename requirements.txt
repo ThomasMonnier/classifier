@@ -5,7 +5,7 @@ pdf2image
 opencv-python-headless
 black
 isort
-scikit-learn
+scikit-learn==1.0.2
 scipy
 matplotlib
 pandas
