@@ -1,4 +1,5 @@
 import shutil
+import pandas as pd
 
 import streamlit as st
 
@@ -15,21 +16,20 @@ dict_labels = {
     5: "naturgy",
 }
 
+dict_countries = pd.read_csv('languages.csv').to_dict(orient='records')
+
 
 def classifier_country(file):
     img_path = convert_pdf(file)
     ocr_str = ocr_tesseract(img_path)
-    all_lng, lng = detect_lang_from_str(ocr_str)
-    if lng is None:
-        st.error(
-            "Impossible to detect the language of the document, check {}".format(
-                all_lng
-            )
-        )
-        return None, img_path
+    lng, prob = detect_lang_from_str(ocr_str)
+    if not prob:
+        st.info('Probability info: {}%'.format(prob * 100))
+        st.info("Country: {}".format(dict_countries.get(lng)))
     else:
-        st.info("Country: {}".format(lng))
-        return lng, img_path
+        st.info('Probability info: {}%'.format(prob * 100))
+        st.info("Country: {}".format(dict_countries.get(lng)))
+    return lng, img_path
 
 
 def classifier_supplier(model_path, img_path):

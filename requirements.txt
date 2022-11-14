@@ -8,3 +8,4 @@ isort
 scikit-learn
 scipy
 matplotlib
+pandas
