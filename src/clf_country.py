@@ -3,8 +3,14 @@ from . import detect
 
 def detect_lang_from_str(ocr_str):
     lines = list(set(ocr_str.split("\n")))
-    lines.remove("")
-    lines.remove(" ")
+    try:
+        lines.remove("")
+    except:
+        pass
+    try:
+        lines.remove(" ")
+    except:
+        pass
 
     lang = {}
     for line in lines:

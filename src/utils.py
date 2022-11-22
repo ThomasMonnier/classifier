@@ -8,8 +8,8 @@ def ocr_tesseract(path):
 def convert_pdf(file):
     if file.split(".")[-1] == "pdf":
         pages = convert_from_path(file, 500)
-        pages[0].save("{}.png".format(file.split(".")[0]), "PNG")
-        return "{}.png".format(file.split(".")[0])
+        pages[0].save("{}.png".format(''.join(file.split(".")[:-1])), "PNG")
+        return "{}.png".format(''.join(file.split(".")[:-1]))
 
     elif file.split(".")[-1] == "png":
         return file
