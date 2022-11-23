@@ -1,2 +1,3 @@
 ENV_classifier/*
 src/__pycache__/*
+.DS_Store
