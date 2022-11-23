@@ -41,4 +41,4 @@ def find_provider_from_invoice(ocr_str, dico_provider):
         del prov_others[prov]
         if prov_val > prov_others[max(prov_others, key=prov_others.get)]:
             return prov
-    return None
+    return "Unknown"

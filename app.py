@@ -35,7 +35,7 @@ def classifier_supplier(model_path, img_path, lng, model_use=True, stats_use=Tru
 
     elif stats_use:
         df_providers = pd.read_csv('classifier_rules/{}_provider.csv'.format(lng))
-        dico_provider = {df_providers[column].name: [y for y in df_providers[column] if not pd.isna(y)] for column in df_providers}
+        dico_provider = {df_providers[column].name: [y.lower() for y in df_providers[column] if not pd.isna(y)] for column in df_providers}
         stats_pred = find_provider_from_invoice(ocr_str.lower(), dico_provider)
     
     return model_pred, stats_pred
@@ -43,7 +43,7 @@ def classifier_supplier(model_path, img_path, lng, model_use=True, stats_use=Tru
 
 def classifier_type(ocr_str, lng):
     df_contracts = pd.read_csv('classifier_rules/{}_contract.csv'.format(lng), skiprows=[0, 1], names=['Electricity_+', 'Gas_+', 'Heat_+', 'Other_+', 'Electricity_-', 'Gas_-', 'Heat_-', 'Other_-'])
-    dico_contracts = {df_contracts[column].name: [y for y in df_contracts[column] if not pd.isna(y)] for column in df_contracts}
+    dico_contracts = {df_contracts[column].name: [y.lower() for y in df_contracts[column] if not pd.isna(y)] for column in df_contracts}
     energy_type, message = find_contract_from_invoice(ocr_str.lower(), dico_contracts)
     return energy_type, message
 
