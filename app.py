@@ -143,7 +143,7 @@ if __name__ == "__main__":
                 dataframe.dataframe(st.session_state.df)
 
                 # Type
-                if lng == "es" or lng == "fr":
+                if lng in ["es", "fr", "it"]:
                     energy_type, message = classifier_type(ocr_str, lng)
                     st.session_state.df.loc[
                         st.session_state.df["File"] == uploaded_file.name, "Type"
@@ -155,7 +155,7 @@ if __name__ == "__main__":
                     dataframe.dataframe(st.session_state.df)
 
                 # Supplier
-                if lng == "es" or lng == "ca":
+                if lng in ["es", "ca"]:
                     model_path = "models/spain_supplier_model.pkl"
                     model_pred, stats_pred = classifier_supplier(
                         model_path, img_path, "es"
@@ -170,7 +170,7 @@ if __name__ == "__main__":
                     ] = stats_pred.upper()
                     dataframe.dataframe(st.session_state.df)
 
-                elif lng == "fr":
+                elif lng in ["fr", "it"]:
                     model_path = "models/spain_supplier_model.pkl"
                     _, stats_pred = classifier_supplier(model_path, img_path, lng)
                     st.session_state.df.loc[
