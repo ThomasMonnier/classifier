@@ -34,7 +34,7 @@ def find_contract_from_invoice(ocr_str, dico_contracts):
             ):
                 return "Gas", "Certain"
             else:
-                return "Electricity", "To be checked"
+                return "Gas", "To be checked"
         else:
             return "Unknown", "To be checked"
 
