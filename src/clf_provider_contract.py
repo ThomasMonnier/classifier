@@ -4,27 +4,38 @@ def find_contract_from_invoice(ocr_str, dico_contracts):
         dict_count_contracts[k] = 0
         for el in v:
             dict_count_contracts[k] += ocr_str.count(el)
-    
+
     dict_count_contracts_sum = {
-        'Electricity': dict_count_contracts['Electricity_+'] - dict_count_contracts['Electricity_-'],
-        'Gas': dict_count_contracts['Gas_+'] - dict_count_contracts['Gas_-'],
-        'Heat': dict_count_contracts['Heat_+'] - dict_count_contracts['Heat_-']
+        "Electricity": dict_count_contracts["Electricity_+"]
+        - dict_count_contracts["Electricity_-"],
+        "Gas": dict_count_contracts["Gas_+"] - dict_count_contracts["Gas_-"],
+        "Heat": dict_count_contracts["Heat_+"] - dict_count_contracts["Heat_-"],
     }
 
     if dict_count_contracts_sum["Heat"] > 2:
         return "Heat", "To be checked"
-    else :
+    else:
         if dict_count_contracts_sum["Electricity"] > dict_count_contracts_sum["Gas"]:
-            if dict_count_contracts_sum["Electricity"] > 7 and dict_count_contracts_sum["Electricity"] - dict_count_contracts_sum["Gas"] > 5 :
+            if (
+                dict_count_contracts_sum["Electricity"] > 7
+                and dict_count_contracts_sum["Electricity"]
+                - dict_count_contracts_sum["Gas"]
+                > 5
+            ):
                 return "Electricity", "Certain"
-            else :
+            else:
                 return "Electricity", "To be checked"
         elif dict_count_contracts_sum["Electricity"] < dict_count_contracts_sum["Gas"]:
-            if dict_count_contracts_sum["Gas"] > 7 and dict_count_contracts_sum["Gas"] - dict_count_contracts_sum["Electricity"] > 5 :
+            if (
+                dict_count_contracts_sum["Gas"] > 7
+                and dict_count_contracts_sum["Gas"]
+                - dict_count_contracts_sum["Electricity"]
+                > 5
+            ):
                 return "Gas", "Certain"
-            else :
+            else:
                 return "Electricity", "To be checked"
-        else :
+        else:
             return "Unknown", "To be checked"
 
 
