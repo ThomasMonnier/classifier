@@ -33,7 +33,7 @@ def classifier_supplier(model_path, img_path, lng, model_use=True, stats_use=Tru
         img_final = prepare_img(img_path)
         model_pred = model.predict([img_final])
 
-    elif stats_use:
+    if stats_use:
         df_providers = pd.read_csv('classifier_rules/{}_provider.csv'.format(lng))
         dico_provider = {df_providers[column].name: [y.lower() for y in df_providers[column] if not pd.isna(y)] for column in df_providers}
         stats_pred = find_provider_from_invoice(ocr_str.lower(), dico_provider)
