@@ -1,4 +1,4 @@
-from . import convert_from_path, csv, pytesseract, shutil, st
+from . import convert_from_path, os, pytesseract, st
 
 
 def ocr_tesseract(path):
@@ -19,4 +19,4 @@ def convert_pdf(file):
 
 
 def action():
-    shutil.rmtree("results.csv")
+    os.remove("results.csv")

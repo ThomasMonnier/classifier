@@ -1,6 +1,6 @@
 import csv
 import pickle
-import shutil
+import os
 
 import cv2
 import numpy as np
