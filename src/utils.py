@@ -19,4 +19,4 @@ def convert_pdf(file):
 
 
 def action():
-    shutil.rmtree("files")
+    shutil.rmtree("results.csv")
