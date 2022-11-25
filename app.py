@@ -113,7 +113,7 @@ if __name__ == "__main__":
         dataframe = st.dataframe(st.session_state.df.style.apply(
             highlight_suppliers, subset=["Supplier (ML)", "Supplier (Stats)", "Supplier (Mindee)"]
             ).apply(
-                highlight_language, subset=["Language"]
+                highlight_language, subset=["Language Probability"]
             )
         )
 
@@ -148,7 +148,7 @@ if __name__ == "__main__":
                 dataframe = st.dataframe(st.session_state.df.style.apply(
                     highlight_suppliers, subset=["Supplier (ML)", "Supplier (Stats)", "Supplier (Mindee)"]
                     ).apply(
-                        highlight_language, subset=["Language"]
+                        highlight_language, subset=["Language Probability"]
                     )
                 )
 
@@ -165,7 +165,7 @@ if __name__ == "__main__":
                     dataframe = st.dataframe(st.session_state.df.style.apply(
                         highlight_suppliers, subset=["Supplier (ML)", "Supplier (Stats)", "Supplier (Mindee)"]
                         ).apply(
-                            highlight_language, subset=["Language"]
+                            highlight_language, subset=["Language Probability"]
                         )
                     )
                 
@@ -186,7 +186,7 @@ if __name__ == "__main__":
                     dataframe = st.dataframe(st.session_state.df.style.apply(
                         highlight_suppliers, subset=["Supplier (ML)", "Supplier (Stats)", "Supplier (Mindee)"]
                         ).apply(
-                            highlight_language, subset=["Language"]
+                            highlight_language, subset=["Language Probability"]
                         )
                     )
 
@@ -200,7 +200,7 @@ if __name__ == "__main__":
                     dataframe = st.dataframe(st.session_state.df.style.apply(
                         highlight_suppliers, subset=["Supplier (ML)", "Supplier (Stats)", "Supplier (Mindee)"]
                         ).apply(
-                            highlight_language, subset=["Language"]
+                            highlight_language, subset=["Language Probability"]
                         )
                     )
 
