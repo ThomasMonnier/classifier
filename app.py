@@ -171,7 +171,8 @@ if __name__ == "__main__":
                         ],
                     )
                     .apply(highlight_language, subset=["Language Probability"])
-                    .apply(highlight_type, subset=["Type Probability"])
+                    .apply(highlight_type, subset=["Type Probability"]),
+                    width=1400
                 )
 
                 # Type
@@ -194,7 +195,8 @@ if __name__ == "__main__":
                             ],
                         )
                         .apply(highlight_language, subset=["Language Probability"])
-                        .apply(highlight_type, subset=["Type Probability"])
+                        .apply(highlight_type, subset=["Type Probability"]),
+                        width=1400
                     )
 
                 # Supplier
@@ -221,7 +223,8 @@ if __name__ == "__main__":
                             ],
                         )
                         .apply(highlight_language, subset=["Language Probability"])
-                        .apply(highlight_type, subset=["Type Probability"])
+                        .apply(highlight_type, subset=["Type Probability"]),
+                        width=1400
                     )
 
                 elif lng in ["fr", "it"]:
@@ -241,7 +244,8 @@ if __name__ == "__main__":
                             ],
                         )
                         .apply(highlight_language, subset=["Language Probability"])
-                        .apply(highlight_type, subset=["Type Probability"])
+                        .apply(highlight_type, subset=["Type Probability"]),
+                        width=1400
                     )
 
             progress_bar.progress(int(100 * (i + 1) / len(uploaded_files)))
