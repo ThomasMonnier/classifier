@@ -5,10 +5,19 @@ import pandas as pd
 import streamlit as st
 
 from src.clf_country import detect_lang_from_str
-from src.clf_provider_contract import (find_contract_from_invoice,
-                                       find_provider_from_invoice)
+from src.clf_provider_contract import (
+    find_contract_from_invoice,
+    find_provider_from_invoice,
+)
 from src.clf_supplier import load_model, prepare_img
-from src.utils import action, convert_pdf, ocr_tesseract, highlight_suppliers, highlight_language
+from src.utils import (
+    action,
+    convert_pdf,
+    ocr_tesseract,
+    highlight_suppliers,
+    highlight_language,
+    highlight_type,
+)
 
 dict_labels = {
     0: "Endesa",
@@ -110,11 +119,13 @@ if __name__ == "__main__":
     if uploaded_files:
         progress_bar = st.progress(0)
 
-        dataframe = st.dataframe(st.session_state.df.style.apply(
-            highlight_suppliers, subset=["Supplier (ML)", "Supplier (Stats)", "Supplier (Mindee)"]
-            ).apply(
-                highlight_language, subset=["Language Probability"]
+        dataframe = st.dataframe(
+            st.session_state.df.style.apply(
+                highlight_suppliers,
+                subset=["Supplier (ML)", "Supplier (Stats)", "Supplier (Mindee)"],
             )
+            .apply(highlight_language, subset=["Language Probability"])
+            .apply(highlight_type, subset=["Type Probability"])
         )
 
         for i, uploaded_file in enumerate(uploaded_files):
@@ -145,11 +156,17 @@ if __name__ == "__main__":
                     st.session_state.df["File"] == uploaded_file.name,
                     "Language Probability",
                 ] = int(100 * prob)
-                dataframe = st.dataframe(st.session_state.df.style.apply(
-                    highlight_suppliers, subset=["Supplier (ML)", "Supplier (Stats)", "Supplier (Mindee)"]
-                    ).apply(
-                        highlight_language, subset=["Language Probability"]
+                dataframe = st.dataframe(
+                    st.session_state.df.style.apply(
+                        highlight_suppliers,
+                        subset=[
+                            "Supplier (ML)",
+                            "Supplier (Stats)",
+                            "Supplier (Mindee)",
+                        ],
                     )
+                    .apply(highlight_language, subset=["Language Probability"])
+                    .apply(highlight_type, subset=["Type Probability"])
                 )
 
                 # Type
@@ -162,13 +179,19 @@ if __name__ == "__main__":
                         st.session_state.df["File"] == uploaded_file.name,
                         "Type Probability",
                     ] = message
-                    dataframe = st.dataframe(st.session_state.df.style.apply(
-                        highlight_suppliers, subset=["Supplier (ML)", "Supplier (Stats)", "Supplier (Mindee)"]
-                        ).apply(
-                            highlight_language, subset=["Language Probability"]
+                    dataframe = st.dataframe(
+                        st.session_state.df.style.apply(
+                            highlight_suppliers,
+                            subset=[
+                                "Supplier (ML)",
+                                "Supplier (Stats)",
+                                "Supplier (Mindee)",
+                            ],
                         )
+                        .apply(highlight_language, subset=["Language Probability"])
+                        .apply(highlight_type, subset=["Type Probability"])
                     )
-                
+
                 # Supplier
                 if lng in ["es", "ca"]:
                     model_path = "models/spain_supplier_model.pkl"
@@ -183,11 +206,17 @@ if __name__ == "__main__":
                         st.session_state.df["File"] == uploaded_file.name,
                         "Supplier (Stats)",
                     ] = stats_pred.upper()
-                    dataframe = st.dataframe(st.session_state.df.style.apply(
-                        highlight_suppliers, subset=["Supplier (ML)", "Supplier (Stats)", "Supplier (Mindee)"]
-                        ).apply(
-                            highlight_language, subset=["Language Probability"]
+                    dataframe = st.dataframe(
+                        st.session_state.df.style.apply(
+                            highlight_suppliers,
+                            subset=[
+                                "Supplier (ML)",
+                                "Supplier (Stats)",
+                                "Supplier (Mindee)",
+                            ],
                         )
+                        .apply(highlight_language, subset=["Language Probability"])
+                        .apply(highlight_type, subset=["Type Probability"])
                     )
 
                 elif lng in ["fr", "it"]:
@@ -197,11 +226,17 @@ if __name__ == "__main__":
                         st.session_state.df["File"] == uploaded_file.name,
                         "Supplier (Stats)",
                     ] = stats_pred.upper()
-                    dataframe = st.dataframe(st.session_state.df.style.apply(
-                        highlight_suppliers, subset=["Supplier (ML)", "Supplier (Stats)", "Supplier (Mindee)"]
-                        ).apply(
-                            highlight_language, subset=["Language Probability"]
+                    dataframe = st.dataframe(
+                        st.session_state.df.style.apply(
+                            highlight_suppliers,
+                            subset=[
+                                "Supplier (ML)",
+                                "Supplier (Stats)",
+                                "Supplier (Mindee)",
+                            ],
                         )
+                        .apply(highlight_language, subset=["Language Probability"])
+                        .apply(highlight_type, subset=["Type Probability"])
                     )
 
             progress_bar.progress(int(100 * (i + 1) / len(uploaded_files)))

@@ -1,4 +1,4 @@
-from . import convert_from_path, os, pytesseract, st, pd
+from . import convert_from_path, os, pd, pytesseract, st
 
 
 def ocr_tesseract(path):
@@ -23,21 +23,25 @@ def action():
 
 
 def highlight_suppliers(series):
-    green = 'background-color: aquamarine'
-    very_red = 'background-color: tomato'
-    red = 'background-color: mistyrose'
+    green = "background-color: aquamarine"
+    very_red = "background-color: tomato"
+    red = "background-color: mistyrose"
     return [very_red if v == "UNKNOWN" else red if v is None else green for v in series]
 
 
 def highlight_language(series):
-    green = 'background-color: aquamarine'
-    very_red = 'background-color: tomato'
-    red = 'background-color: mistyrose'
-    return [red if 50 < int(v) < 70 else very_red if int(v) <= 50 else green for v in series]
+    green = "background-color: aquamarine"
+    very_red = "background-color: tomato"
+    red = "background-color: mistyrose"
+    return [
+        red if 50 < int(v) < 70 else very_red if int(v) <= 50 else green for v in series
+    ]
 
 
 def highlight_type(series):
-    green = 'background-color: aquamarine'
-    orange = 'background-color: bisque'
-    red = 'background-color: mistyrose'
-    return [orange if v == "To be checked" else red if v is None else green for v in series]
+    green = "background-color: aquamarine"
+    orange = "background-color: bisque"
+    red = "background-color: mistyrose"
+    return [
+        orange if v == "To be checked" else red if v is None else green for v in series
+    ]
