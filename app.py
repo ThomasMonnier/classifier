@@ -156,7 +156,7 @@ if __name__ == "__main__":
                     st.session_state.df["File"] == uploaded_file.name,
                     "Language Probability",
                 ] = int(100 * prob)
-                dataframe = st.dataframe(
+                dataframe.dataframe(
                     st.session_state.df.style.apply(
                         highlight_suppliers,
                         subset=[
@@ -179,7 +179,7 @@ if __name__ == "__main__":
                         st.session_state.df["File"] == uploaded_file.name,
                         "Type Probability",
                     ] = message
-                    dataframe = st.dataframe(
+                    dataframe.dataframe(
                         st.session_state.df.style.apply(
                             highlight_suppliers,
                             subset=[
@@ -206,7 +206,7 @@ if __name__ == "__main__":
                         st.session_state.df["File"] == uploaded_file.name,
                         "Supplier (Stats)",
                     ] = stats_pred.upper()
-                    dataframe = st.dataframe(
+                    dataframe.dataframe(
                         st.session_state.df.style.apply(
                             highlight_suppliers,
                             subset=[
@@ -226,7 +226,7 @@ if __name__ == "__main__":
                         st.session_state.df["File"] == uploaded_file.name,
                         "Supplier (Stats)",
                     ] = stats_pred.upper()
-                    dataframe = st.dataframe(
+                    dataframe.dataframe(
                         st.session_state.df.style.apply(
                             highlight_suppliers,
                             subset=[
