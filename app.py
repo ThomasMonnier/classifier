@@ -8,7 +8,7 @@ from src.clf_country import detect_lang_from_str
 from src.clf_provider_contract import (find_contract_from_invoice,
                                        find_provider_from_invoice)
 from src.clf_supplier import load_model, prepare_img
-from src.utils import action, convert_pdf, ocr_tesseract, highlight_specific_cell
+from src.utils import action, convert_pdf, ocr_tesseract, highlight_SLA
 
 dict_labels = {
     0: "Endesa",
