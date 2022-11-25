@@ -34,3 +34,10 @@ def highlight_language(series):
     very_red = 'background-color: tomato'
     red = 'background-color: mistyrose'
     return [red if 50 < int(v) < 70 else very_red if int(v) <= 50 else green for v in series]
+
+
+def highlight_type(series):
+    green = 'background-color: aquamarine'
+    orange = 'background-color: bisque'
+    red = 'background-color: mistyrose'
+    return [orange if v == "To be checked" else red if v is None else green for v in series]
