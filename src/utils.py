@@ -23,7 +23,7 @@ def action():
 
 
 def highlight_SLA(series):
-    green = 'background-color: mistyrose'
-    red = 'background-color: lightred'
+    green = 'background-color: aquamarine'
+    red = 'background-color: mistyrose'
     return [red if v == "UNKNOWN" or v is None else green for v in series]
 
