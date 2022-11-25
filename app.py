@@ -112,7 +112,7 @@ if __name__ == "__main__":
 
         dataframe = st.dataframe(st.session_state.df.style.apply(
             highlight_suppliers, subset=["Supplier (ML)", "Supplier (Stats)", "Supplier (Mindee)"]
-            ).appy(
+            ).apply(
                 highlight_language, subset=["Language"]
             )
         )
@@ -147,7 +147,7 @@ if __name__ == "__main__":
                 ] = int(100 * prob)
                 dataframe = st.dataframe(st.session_state.df.style.apply(
                     highlight_suppliers, subset=["Supplier (ML)", "Supplier (Stats)", "Supplier (Mindee)"]
-                    ).appy(
+                    ).apply(
                         highlight_language, subset=["Language"]
                     )
                 )
@@ -164,7 +164,7 @@ if __name__ == "__main__":
                     ] = message
                     dataframe = st.dataframe(st.session_state.df.style.apply(
                         highlight_suppliers, subset=["Supplier (ML)", "Supplier (Stats)", "Supplier (Mindee)"]
-                        ).appy(
+                        ).apply(
                             highlight_language, subset=["Language"]
                         )
                     )
@@ -185,7 +185,7 @@ if __name__ == "__main__":
                     ] = stats_pred.upper()
                     dataframe = st.dataframe(st.session_state.df.style.apply(
                         highlight_suppliers, subset=["Supplier (ML)", "Supplier (Stats)", "Supplier (Mindee)"]
-                        ).appy(
+                        ).apply(
                             highlight_language, subset=["Language"]
                         )
                     )
@@ -199,7 +199,7 @@ if __name__ == "__main__":
                     ] = stats_pred.upper()
                     dataframe = st.dataframe(st.session_state.df.style.apply(
                         highlight_suppliers, subset=["Supplier (ML)", "Supplier (Stats)", "Supplier (Mindee)"]
-                        ).appy(
+                        ).apply(
                             highlight_language, subset=["Language"]
                         )
                     )
