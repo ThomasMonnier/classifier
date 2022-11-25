@@ -129,7 +129,8 @@ if __name__ == "__main__":
                 subset=["Supplier (ML)", "Supplier (Stats)", "Supplier (Mindee)"],
             )
             .apply(highlight_language, subset=["Language Probability"])
-            .apply(highlight_type, subset=["Type Probability"])
+            .apply(highlight_type, subset=["Type Probability"]),
+            width=700, height=768
         )
 
         for i, uploaded_file in enumerate(uploaded_files):
