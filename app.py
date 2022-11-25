@@ -21,7 +21,6 @@ from src.utils import (
 
 
 st.set_page_config(layout="wide")
-st.set_option('wideMode' , True)
 
 
 dict_labels = {
