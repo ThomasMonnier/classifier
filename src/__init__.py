@@ -4,6 +4,7 @@ import os
 
 import cv2
 import numpy as np
+import pandas as pd
 import pytesseract
 import streamlit as st
 
