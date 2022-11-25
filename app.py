@@ -19,6 +19,10 @@ from src.utils import (
     highlight_type,
 )
 
+
+st.set_page_config(layout="wide")
+
+
 dict_labels = {
     0: "Endesa",
     1: "Energia xxi",
