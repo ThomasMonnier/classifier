@@ -22,11 +22,8 @@ def action():
     os.remove("results.csv")
 
 
-def highlight_specific_cell(x):
-    idx = 9
+def highlight_SLA(series):
     green = 'background-color: lightgreen'
     red = 'background-color: red'
-    color = [red if v == "Unknown" or v is None else green for v in x]
-    xx = pd.Series('', index=x.index)
-    xx.loc[idx] = color[idx]
-    return xx
+    return [red if v == "Unknown" or v is None else green for v in series]
+
