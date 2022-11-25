@@ -110,7 +110,7 @@ if __name__ == "__main__":
     if uploaded_files:
         progress_bar = st.progress(0)
 
-        dataframe = st.dataframe(st.session_state.df.style.apply(highlight_specific_cell, subset=["Supplier (ML)", "Supplier (Stats)", "Supplier (Mindee)"]))
+        dataframe = st.dataframe(st.session_state.df.style.apply(highlight_SLA, subset=["Supplier (ML)", "Supplier (Stats)", "Supplier (Mindee)"]))
 
         for i, uploaded_file in enumerate(uploaded_files):
             if uploaded_file.name not in list(st.session_state.df["File"]):
@@ -140,7 +140,7 @@ if __name__ == "__main__":
                     st.session_state.df["File"] == uploaded_file.name,
                     "Language Probability",
                 ] = int(100 * prob)
-                dataframe.dataframe(st.session_state.df.style.apply(highlight_specific_cell, subset=["Supplier (ML)", "Supplier (Stats)", "Supplier (Mindee)"]))
+                dataframe.dataframe(st.session_state.df.style.apply(highlight_SLA, subset=["Supplier (ML)", "Supplier (Stats)", "Supplier (Mindee)"]))
 
                 # Type
                 if lng in ["es", "fr", "it"]:
@@ -152,7 +152,7 @@ if __name__ == "__main__":
                         st.session_state.df["File"] == uploaded_file.name,
                         "Type Probability",
                     ] = message
-                    dataframe.dataframe(st.session_state.df.style.apply(highlight_specific_cell, subset=["Supplier (ML)", "Supplier (Stats)", "Supplier (Mindee)"]))
+                    dataframe.dataframe(st.session_state.df.style.apply(highlight_SLA, subset=["Supplier (ML)", "Supplier (Stats)", "Supplier (Mindee)"]))
 
                 # Supplier
                 if lng in ["es", "ca"]:
@@ -168,7 +168,7 @@ if __name__ == "__main__":
                         st.session_state.df["File"] == uploaded_file.name,
                         "Supplier (Stats)",
                     ] = stats_pred.upper()
-                    dataframe.dataframe(st.session_state.df.style.apply(highlight_specific_cell, subset=["Supplier (ML)", "Supplier (Stats)", "Supplier (Mindee)"]))
+                    dataframe.dataframe(st.session_state.df.style.apply(highlight_SLA, subset=["Supplier (ML)", "Supplier (Stats)", "Supplier (Mindee)"]))
 
                 elif lng in ["fr", "it"]:
                     model_path = "models/spain_supplier_model.pkl"
@@ -177,7 +177,7 @@ if __name__ == "__main__":
                         st.session_state.df["File"] == uploaded_file.name,
                         "Supplier (Stats)",
                     ] = stats_pred.upper()
-                    dataframe.dataframe(st.session_state.df.style.apply(highlight_specific_cell, subset=["Supplier (ML)", "Supplier (Stats)", "Supplier (Mindee)"]))
+                    dataframe.dataframe(st.session_state.df.style.apply(highlight_SLA, subset=["Supplier (ML)", "Supplier (Stats)", "Supplier (Mindee)"]))
 
             progress_bar.progress(int(100 * (i + 1) / len(uploaded_files)))
 
