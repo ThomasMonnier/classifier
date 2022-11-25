@@ -8,7 +8,7 @@ from src.clf_country import detect_lang_from_str
 from src.clf_provider_contract import (find_contract_from_invoice,
                                        find_provider_from_invoice)
 from src.clf_supplier import load_model, prepare_img
-from src.utils import action, convert_pdf, ocr_tesseract, highlight_SLA
+from src.utils import action, convert_pdf, ocr_tesseract, highlight_suppliers, highlight_language
 
 dict_labels = {
     0: "Endesa",
@@ -110,7 +110,12 @@ if __name__ == "__main__":
     if uploaded_files:
         progress_bar = st.progress(0)
 
-        dataframe = st.dataframe(st.session_state.df.style.apply(highlight_SLA, subset=["Supplier (ML)", "Supplier (Stats)", "Supplier (Mindee)"]))
+        dataframe = st.dataframe(st.session_state.df.style.apply(
+            highlight_suppliers, subset=["Supplier (ML)", "Supplier (Stats)", "Supplier (Mindee)"]
+            ).appy(
+                highlight_language, subset=["Language"]
+            )
+        )
 
         for i, uploaded_file in enumerate(uploaded_files):
             if uploaded_file.name not in list(st.session_state.df["File"]):
@@ -140,7 +145,12 @@ if __name__ == "__main__":
                     st.session_state.df["File"] == uploaded_file.name,
                     "Language Probability",
                 ] = int(100 * prob)
-                dataframe.dataframe(st.session_state.df.style.apply(highlight_SLA, subset=["Supplier (ML)", "Supplier (Stats)", "Supplier (Mindee)"]))
+                dataframe = st.dataframe(st.session_state.df.style.apply(
+                    highlight_suppliers, subset=["Supplier (ML)", "Supplier (Stats)", "Supplier (Mindee)"]
+                    ).appy(
+                        highlight_language, subset=["Language"]
+                    )
+                )
 
                 # Type
                 if lng in ["es", "fr", "it"]:
@@ -152,8 +162,13 @@ if __name__ == "__main__":
                         st.session_state.df["File"] == uploaded_file.name,
                         "Type Probability",
                     ] = message
-                    dataframe.dataframe(st.session_state.df.style.apply(highlight_SLA, subset=["Supplier (ML)", "Supplier (Stats)", "Supplier (Mindee)"]))
-
+                    dataframe = st.dataframe(st.session_state.df.style.apply(
+                        highlight_suppliers, subset=["Supplier (ML)", "Supplier (Stats)", "Supplier (Mindee)"]
+                        ).appy(
+                            highlight_language, subset=["Language"]
+                        )
+                    )
+                
                 # Supplier
                 if lng in ["es", "ca"]:
                     model_path = "models/spain_supplier_model.pkl"
@@ -168,7 +183,12 @@ if __name__ == "__main__":
                         st.session_state.df["File"] == uploaded_file.name,
                         "Supplier (Stats)",
                     ] = stats_pred.upper()
-                    dataframe.dataframe(st.session_state.df.style.apply(highlight_SLA, subset=["Supplier (ML)", "Supplier (Stats)", "Supplier (Mindee)"]))
+                    dataframe = st.dataframe(st.session_state.df.style.apply(
+                        highlight_suppliers, subset=["Supplier (ML)", "Supplier (Stats)", "Supplier (Mindee)"]
+                        ).appy(
+                            highlight_language, subset=["Language"]
+                        )
+                    )
 
                 elif lng in ["fr", "it"]:
                     model_path = "models/spain_supplier_model.pkl"
@@ -177,7 +197,12 @@ if __name__ == "__main__":
                         st.session_state.df["File"] == uploaded_file.name,
                         "Supplier (Stats)",
                     ] = stats_pred.upper()
-                    dataframe.dataframe(st.session_state.df.style.apply(highlight_SLA, subset=["Supplier (ML)", "Supplier (Stats)", "Supplier (Mindee)"]))
+                    dataframe = st.dataframe(st.session_state.df.style.apply(
+                        highlight_suppliers, subset=["Supplier (ML)", "Supplier (Stats)", "Supplier (Mindee)"]
+                        ).appy(
+                            highlight_language, subset=["Language"]
+                        )
+                    )
 
             progress_bar.progress(int(100 * (i + 1) / len(uploaded_files)))
 

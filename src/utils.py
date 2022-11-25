@@ -22,9 +22,15 @@ def action():
     os.remove("results.csv")
 
 
-def highlight_SLA(series):
+def highlight_suppliers(series):
     green = 'background-color: aquamarine'
     very_red = 'background-color: tomato'
     red = 'background-color: mistyrose'
     return [very_red if v == "UNKNOWN" else red if v is None else green for v in series]
 
+
+def highlight_language(series):
+    green = 'background-color: aquamarine'
+    very_red = 'background-color: tomato'
+    red = 'background-color: mistyrose'
+    return [red if '50' < v < '70' else very_red if v <= '50' else green for v in series]
