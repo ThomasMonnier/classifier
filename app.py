@@ -130,7 +130,7 @@ if __name__ == "__main__":
             )
             .apply(highlight_language, subset=["Language Probability"])
             .apply(highlight_type, subset=["Type Probability"]),
-            width=700, height=768
+            width=1400
         )
 
         for i, uploaded_file in enumerate(uploaded_files):
